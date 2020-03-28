@@ -10,4 +10,9 @@ public class DefaultController {
     public int index() {
         return (int) (Math.random() * 1_000_000);
     }
+
+    @RequestMapping("/hello")
+    public String hello() {
+        return "Hello World!";
+    }
 }
