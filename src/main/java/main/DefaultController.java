@@ -13,6 +13,6 @@ public class DefaultController {
 
     @RequestMapping("/hello")
     public String hello() {
-        return "Hello World!";
+        return "<H1 align=\"center\">Hello World!</H1>";
     }
 }
