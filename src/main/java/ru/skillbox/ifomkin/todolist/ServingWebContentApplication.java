@@ -1,11 +1,11 @@
-package main;
+package ru.skillbox.ifomkin.todolist;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Main {
+public class ServingWebContentApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        SpringApplication.run(ServingWebContentApplication.class, args);
     }
 }
