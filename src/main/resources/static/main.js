@@ -29,12 +29,20 @@ Vue.component('task-form', { // Форма сообщения
         }
     },
     template:
-        '<div>' +
-        '<input type="text" placeholder = "Name" v-model="name" />' +
-        '<input type="text" placeholder = "Description" v-model="description" />' +
-        '<input type="text" placeholder = "Author" v-model="author" />' +
-        '<input type="button" value="Save task" v-on:click="save" />' +
-        '</div>',
+        '<form><div class="form-row">' +
+        '<div class="col">' +
+        '<input type="text" class="form-control" placeholder="Имя" v-model="name" />' +
+        '</div>' +
+        '<div class="col">' +
+        '<input type="text" class="form-control" placeholder="Описание" v-model="description" />' +
+        '</div>' +
+        '<div class="col">' +
+        '<input type="text" class="form-control" placeholder="Автор" v-model="author" />' +
+        '</div>' +
+        '<div class="col">' +
+        '<input type="button" class="btn btn-success" value="Сохранить" v-on:click="save" />' +
+        '</div>' +
+        '</div></form>',
     methods: {
         save: function () {
             var task = {
@@ -69,18 +77,21 @@ Vue.component('task-form', { // Форма сообщения
 
 Vue.component('task-row', { //Строчка с заданием
     props: ['task', 'editTask', 'tasks'],
-    template: '<div>' +
-        '<i>{{task.id}}</i> {{task.name}} <strong>{{task.description}}</strong> {{task.author}}' +
-        '<span>' +
-        '<input type="button" value="Edit" v-on:click="edit"/>' +
-        '<input type="button" value="Delete" v-on:click="del"/>' +
-        '</span>' +
-        '</div>',
+    template:
+        '<tr>' +
+        '<th scope="row>">{{task.id}}</th>' +
+        '<td>{{task.name}}</td>' +
+        '<td>{{task.description}}</td>' +
+        '<td>{{task.author}}</td>' +
+        '<td>{{task.creationDate}}</td>' +
+        '<td><input type="button" class="btn btn-info" value="Изменить" v-on:click="edit"/></td>' +
+        '<td><input type="button" class="btn btn-danger" value="Удалить" v-on:click="del"/></td>' +
+        '</tr>',
     methods: {
         edit: function () {
             this.editTask(this.task);
         },
-        del: function() {
+        del: function () {
             taskApi.remove({id: this.task.id}).then(result => {
                 if (result.ok) {
                     this.tasks.splice(this.tasks.indexOf(this.task), 1)
@@ -91,7 +102,19 @@ Vue.component('task-row', { //Строчка с заданием
 });
 
 Vue.component('task-table-header', { //Временная шапка таблицы
-    template: '<div><i>ID</i> <strong>Description</strong> Author</div>'
+    template: '' +
+        '' +
+        '    <thead class="thead-dark">\n' +
+        '<br>' +
+        '    <tr>' +
+        '        <th scope="col">ID</th>' +
+        '        <th scope="col">Имя</th>' +
+        '        <th scope="col">Описание</th>' +
+        '        <th scope="col">Автор</th>' +
+        '        <th scope="col">Дата создания</th>' +
+        '        <th scope="col" colspan="2">Редактирование</th>' +
+        '    </tr>' +
+        '    </thead>'
 });
 
 Vue.component('task-list', { //Список заданий с циклом
@@ -104,8 +127,12 @@ Vue.component('task-list', { //Список заданий с циклом
     template: '' +
         '<div>' +
         '<task-form :tasks="tasks" :taskAttr="task"/>' +
+        '<table class="table">' +
         '<task-table-header />' +
+        '<tbody>' +
         '<task-row v-for="task in tasks" v-bind:key="task.id" :tasks="tasks" :task="task" :editTask="editTask"/>' +
+        '</tbody>' +
+        '</table>' +
         '</div>',
     created: function () {
         taskApi.get().then(result =>

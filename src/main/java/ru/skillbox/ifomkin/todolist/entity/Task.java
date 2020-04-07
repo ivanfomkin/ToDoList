@@ -3,7 +3,9 @@ package ru.skillbox.ifomkin.todolist.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 @Data
 @Entity
@@ -14,6 +16,7 @@ public class Task {
     private int id;
     private String name;
     private String description;
+    @Temporal(TemporalType.DATE)
     private Date creationDate;
     private String author;
 }
