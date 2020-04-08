@@ -3,13 +3,9 @@ package ru.skillbox.ifomkin.todolist.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.skillbox.ifomkin.todolist.entity.Task;
-import ru.skillbox.ifomkin.todolist.repository.TaskRepository;
 import ru.skillbox.ifomkin.todolist.service.TaskService;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 @RestController
@@ -17,9 +13,7 @@ import java.util.List;
 public class RestConroller {
 
     @Autowired
-    TaskRepository repository;
-    @Autowired
-    TaskService service;
+    private TaskService service;
 
     @GetMapping
     public List<Task> getAll() {
@@ -28,13 +22,13 @@ public class RestConroller {
 
     @GetMapping("{id}")
     public Task taskById(@PathVariable int id) {
-        return repository.findById(id);
+        return service.getRepository().findById(id);
     }
 
     @PostMapping
     public Task add(@RequestBody Task newTask) {
         newTask.setCreationDate(new Date());
-        repository.save(newTask);
+        service.getRepository().save(newTask);
         return newTask;
     }
 
@@ -45,7 +39,7 @@ public class RestConroller {
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id) {
-        repository.deleteById(id);
+        service.getRepository().deleteById(id);
     }
 
 }

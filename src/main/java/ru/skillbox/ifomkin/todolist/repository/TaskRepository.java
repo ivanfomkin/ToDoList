@@ -6,5 +6,5 @@ import ru.skillbox.ifomkin.todolist.entity.Task;
 
 @Repository
 public interface TaskRepository extends CrudRepository<Task, Integer> {
-    public Task findById(int id);
+    Task findById(int id);
 }

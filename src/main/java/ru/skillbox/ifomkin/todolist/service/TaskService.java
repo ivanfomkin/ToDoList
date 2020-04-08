@@ -1,5 +1,6 @@
 package ru.skillbox.ifomkin.todolist.service;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.skillbox.ifomkin.todolist.entity.Task;
 import ru.skillbox.ifomkin.todolist.repository.TaskRepository;
@@ -10,7 +11,8 @@ import java.util.List;
 @org.springframework.stereotype.Service
 public class TaskService {
     @Autowired
-    TaskRepository repository;
+    @Getter
+    private TaskRepository repository;
 
     public List<Task> getAll() {
         Iterable<Task> taskIterable = repository.findAll();
