@@ -3,9 +3,7 @@ package ru.skillbox.ifomkin.todolist.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 @Data
 @Entity

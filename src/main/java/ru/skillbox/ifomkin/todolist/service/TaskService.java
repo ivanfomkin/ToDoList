@@ -11,7 +11,6 @@ import java.util.List;
 @org.springframework.stereotype.Service
 public class TaskService {
     @Autowired
-    @Getter
     private TaskRepository repository;
 
     public List<Task> getAll() {
@@ -30,5 +29,17 @@ public class TaskService {
         currentTask.setName(task.getName());
         repository.save(currentTask);
         return currentTask;
+    }
+
+    public Task findById(int id) {
+        return repository.findById(id);
+    }
+
+    public void save(Task task) {
+        repository.save(task);
+    }
+
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 }

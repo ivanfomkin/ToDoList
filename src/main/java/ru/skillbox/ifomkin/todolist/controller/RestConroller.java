@@ -22,13 +22,13 @@ public class RestConroller {
 
     @GetMapping("{id}")
     public Task taskById(@PathVariable int id) {
-        return service.getRepository().findById(id);
+        return service.findById(id);
     }
 
     @PostMapping
     public Task add(@RequestBody Task newTask) {
         newTask.setCreationDate(new Date());
-        service.getRepository().save(newTask);
+        service.save(newTask);
         return newTask;
     }
 
@@ -39,7 +39,6 @@ public class RestConroller {
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id) {
-        service.getRepository().deleteById(id);
+        service.deleteById(id);
     }
-
 }
