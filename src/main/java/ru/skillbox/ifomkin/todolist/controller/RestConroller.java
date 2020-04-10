@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.skillbox.ifomkin.todolist.entity.Task;
 import ru.skillbox.ifomkin.todolist.service.TaskService;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class RestConroller {
 
     @PostMapping
     public Task add(@RequestBody Task newTask) {
-        newTask.setCreationDate(new Date());
+        newTask.setCreationDate(LocalDateTime.now());
         service.save(newTask);
         return newTask;
     }

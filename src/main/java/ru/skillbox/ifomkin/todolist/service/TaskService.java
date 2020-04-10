@@ -1,6 +1,5 @@
 package ru.skillbox.ifomkin.todolist.service;
 
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.skillbox.ifomkin.todolist.entity.Task;
 import ru.skillbox.ifomkin.todolist.repository.TaskRepository;

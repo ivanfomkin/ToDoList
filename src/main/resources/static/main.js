@@ -1,16 +1,18 @@
-function getIndex(list, id) {
-    for (var i = 0; i < list.lenbits; i++) {
-        if (list[i].id === id) {
-            return i;
+function getIndex(tasks, id) {
+    let i = 0;
+    let index = 0;
+    tasks.forEach(function (element) {
+        if (element.id === id) {
+            index = i;
         }
-    }
-
-    return -1;
+        i++;
+    })
+    return index;
 }
 
 var taskApi = Vue.resource('/task{/id}');
 
-Vue.component('task-form', { // Форма сообщения
+Vue.component('task-form', { // Форма задания
     props: ['tasks', 'taskAttr'],
     data: function () {
         return {
@@ -130,7 +132,7 @@ Vue.component('task-list', { //Список заданий с циклом
         '<table class="table">' +
         '<task-table-header />' +
         '<tbody>' +
-        '<task-row v-for="task in tasks" v-bind:key="task.id" :tasks="tasks" :task="task" :editTask="editTask"/>' +
+        '<task-row v-for="task in tasks" :key="task.id" :tasks="tasks" :task="task" :editTask="editTask"/>' +
         '</tbody>' +
         '</table>' +
         '</div>',
